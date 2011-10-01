@@ -28,6 +28,7 @@ int section(char* value) {
 	if (strncmp(value, "ENTITIES", 8)  == 0 ) return 4;
 	if (strncmp(value, "OBJECTS",  7)  == 0 ) return 5;
 	if (strncmp(value, "THUMBNAILIMAGE", 14) == 0 ) return 6;
+	return -1; // Splat.
 }
 
 
@@ -59,6 +60,8 @@ char * dxfpair::value_char(char *string) {
 	}
 	
 	string[size]=0;
+	
+	return string;
 }
 
 std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
