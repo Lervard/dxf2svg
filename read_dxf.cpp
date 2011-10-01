@@ -158,15 +158,13 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 					}
 					
 					// Loop until there's a blank section or ENDSEC
-					while ((group_code != 0) || (strncmp(value,"ENDSEC",6) != 0)) {
+					do {
 						//classes.push_back(dxfpair(group_code, value));
 						dfxptr->push_back(dxfpair(group_code, value));
 						file.getline(value, MAX_STR_LN);
 						group_code = atoi(value);
 						file.getline(value, MAX_STR_LN);
-						if((!file.eof()))
-							break;
-					}
+					} while (((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));
 				}
 			}	
 			file.getline(value, MAX_STR_LN);
@@ -174,7 +172,7 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 			file.getline(value, MAX_STR_LN);
 			
 			n++;
-		}while((strncmp(value,"EOF",3) != 0) && (!file.eof()));
+		} while((strncmp(value,"EOF",3) != 0) && (!file.eof()));
 	}
 	
 	out.push_back(header);
