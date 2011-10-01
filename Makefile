@@ -1,5 +1,5 @@
 objs = read_dxf.o entities.o entities2elements.o tables.o tables2svg_info.o blocks.o
-flags = -O1
+flags = -O1 -Wall
 
 all: dxf2svg
 
