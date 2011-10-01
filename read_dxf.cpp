@@ -111,7 +111,7 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 		group_code = atoi(value);
 		file.getline(value, MAX_STR_LN);
 		
-		do{	
+		do {	
 			// TODO: set all the chars to be caps for later comparison
 			
 			// Find the SECTION codes
