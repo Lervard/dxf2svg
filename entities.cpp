@@ -272,20 +272,20 @@ double polyline::bulge_start_angle(int point){
 	double dx = points[point+1].ret_x() - points[point].ret_x();
 	double dy = points[point+1].ret_y() - points[point].ret_y();
 	double bulge = points[point].ret_bulge();
-	double xmid = dx/2 + points[point].ret_x();
-	double ymid = dy/2 + points[point].ret_y();
+	//double xmid = dx/2 + points[point].ret_x(); // Unused?
+	//double ymid = dy/2 + points[point].ret_y(); // Unused?
 	double l = sqrt(dx*dx + dy*dy);
 	double r = fabs(l*(bulge*bulge+1)/bulge/4);
 	
-	double a = fabs(bulge*l/2);
+	//double a = fabs(bulge*l/2); // Unused?
 	double sb = bulge/fabs(bulge); //sign of bulge
-	double theta_p = 4*atan(bulge);	
+	//double theta_p = 4*atan(bulge); // Unused?
 	double theta_c;
 	dx != 0 ? theta_c = atan(dy/dx) : theta_c = 1.57079632679489661923;  // Check to make sure that dx is not zero and will give a negative number
 	if (dx > 0)	sb *= -1; // Correct for different point ordering and bulge direction
 
-	double cx = xmid + sb*(r-a)*sin(theta_c);
-	double cy = ymid - sb*(r-a)*cos(theta_c);
+	//double cx = xmid + sb*(r-a)*sin(theta_c); // Unused?
+	//double cy = ymid - sb*(r-a)*cos(theta_c); // Unused?
 	
 	// Now calculate the angle 
 	double theta = asin(points[point].ret_x()/r);
@@ -301,20 +301,20 @@ double polyline::bulge_end_angle(int point){
 	double dx = points[point+1].ret_x() - points[point].ret_x();
 	double dy = points[point+1].ret_y() - points[point].ret_y();
 	double bulge = points[point].ret_bulge();
-	double xmid = dx/2 + points[point].ret_x();
-	double ymid = dy/2 + points[point].ret_y();
+	//double xmid = dx/2 + points[point].ret_x(); // Unused?
+	//double ymid = dy/2 + points[point].ret_y(); // Unused?
 	double l = sqrt(dx*dx + dy*dy);
 	double r = fabs(l*(bulge*bulge+1)/bulge/4);
 	
-	double a = fabs(bulge*l/2);
+	//double a = fabs(bulge*l/2); // Unused?
 	double sb = bulge/fabs(bulge); //sign of bulge
-	double theta_p = 4*atan(bulge);	
+	//double theta_p = 4*atan(bulge); // Unused?
 	double theta_c;
 	dx != 0 ? theta_c = atan(dy/dx) : theta_c = 1.57079632679489661923;  // Check to make sure that dx is not zero and will give a negative number
 	if (dx > 0)	sb *= -1; // Correct for different point ordering and bulge direction
 
-	double cx = xmid + sb*(r-a)*sin(theta_c);
-	double cy = ymid - sb*(r-a)*cos(theta_c);
+	//double cx = xmid + sb*(r-a)*sin(theta_c); // Unused?
+	//double cy = ymid - sb*(r-a)*cos(theta_c); // Unused?
 	
 	// Now calculate the angle 
 	double theta = asin(points[point+1].ret_x()/r);
@@ -467,20 +467,20 @@ double lwpolyline::bulge_start_angle(int point){
 	double dx = points[point+1].ret_x() - points[point].ret_x();
 	double dy = points[point+1].ret_y() - points[point].ret_y();
 	double bulge = points[point].ret_bulge();
-	double xmid = dx/2 + points[point].ret_x();
-	double ymid = dy/2 + points[point].ret_y();
+	//double xmid = dx/2 + points[point].ret_x(); // Unused?
+	//double ymid = dy/2 + points[point].ret_y(); // Unused?
 	double l = sqrt(dx*dx + dy*dy);
 	double r = fabs(l*(bulge*bulge+1)/bulge/4);
 	
-	double a = fabs(bulge*l/2);
+	//double a = fabs(bulge*l/2); // Unused?
 	double sb = bulge/fabs(bulge); //sign of bulge
-	double theta_p = 4*atan(bulge);	
+	//double theta_p = 4*atan(bulge); // Unused?
 	double theta_c;
 	dx != 0 ? theta_c = atan(dy/dx) : theta_c = 1.57079632679489661923;  // Check to make sure that dx is not zero and will give a negative number
 	if (dx > 0)	sb *= -1; // Correct for different point ordering and bulge direction
 
-	double cx = xmid + sb*(r-a)*sin(theta_c);
-	double cy = ymid - sb*(r-a)*cos(theta_c);
+	//double cx = xmid + sb*(r-a)*sin(theta_c); // Unused?
+	//double cy = ymid - sb*(r-a)*cos(theta_c); // Unused?
 	
 	// Now calculate the angle 
 	double theta = asin(points[point].ret_x()/r);
@@ -496,20 +496,20 @@ double lwpolyline::bulge_end_angle(int point){
 	double dx = points[point+1].ret_x() - points[point].ret_x();
 	double dy = points[point+1].ret_y() - points[point].ret_y();
 	double bulge = points[point].ret_bulge();
-	double xmid = dx/2 + points[point].ret_x();
-	double ymid = dy/2 + points[point].ret_y();
+	//double xmid = dx/2 + points[point].ret_x(); // Unused?
+	//double ymid = dy/2 + points[point].ret_y(); // Unused?
 	double l = sqrt(dx*dx + dy*dy);
 	double r = fabs(l*(bulge*bulge+1)/bulge/4);
 	
-	double a = fabs(bulge*l/2);
+	//double a = fabs(bulge*l/2); // Unused?
 	double sb = bulge/fabs(bulge); //sign of bulge
-	double theta_p = 4*atan(bulge);	
+	//double theta_p = 4*atan(bulge); // Unused?
 	double theta_c;
 	dx != 0 ? theta_c = atan(dy/dx) : theta_c = 1.57079632679489661923;  // Check to make sure that dx is not zero and will give a negative number
 	if (dx > 0)	sb *= -1; // Correct for different point ordering and bulge direction
 
-	double cx = xmid + sb*(r-a)*sin(theta_c);
-	double cy = ymid - sb*(r-a)*cos(theta_c);
+	//double cx = xmid + sb*(r-a)*sin(theta_c); // Unused?
+	//double cy = ymid - sb*(r-a)*cos(theta_c); // Unused?
 	
 	// Now calculate the angle 
 	double theta = asin(points[point+1].ret_x()/r);
