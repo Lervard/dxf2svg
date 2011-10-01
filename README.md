@@ -1,10 +1,17 @@
-01 Oct 11
+# 01 Oct 2011
 
 I (Nick Markwell, aka @duckinator) have apparently taken over this after it being dead for 5 years.
 I have gotten it to compile again, and I'm starting to clean up the code a bit.
 I have not actually tested it.
 
-26 Aug 05
+All information from before October 01, 2011 is by Matt Squires. I have, however, reformatted it all.
+
+# 27 Aug 2005
+
+Fixed a fair number of bugs, and broken conversions. LWPOLYLINE works now, text rotation is ok but needs multiple transfomations to get it right, can read broken dxf files (w/o dxf EOF information)
+
+
+# 26 Aug 2005
 
 To use:
 I have only gotten this to work with Inkscape under linux (debian sarge).  But the converter works from the commandline if you want to test it otherwise.
@@ -42,8 +49,4 @@ Windows/Linux -- QCad is ok.  It has a lot of nice features but when I used it a
 
 Matt Squires
 squiresm@colorado.edu
-
-27 Aug 05
-
-Fixed a fair number of bugs, and broken conversions. LWPOLYLINE works now, text rotation is ok but needs multiple transfomations to get it right, can read broken dxf files (w/o dxf EOF information)
 
