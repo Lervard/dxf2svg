@@ -123,6 +123,7 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 				section_num = section(value);
 				
 				if (group_code == 2) {
+					std::vector<dxfpair> *dfxptr;
 					// Make sure the the group code is 2 for the SECTION name
 					// This is a big block of mostly repetitive code, it will result in larger code, but would be faster than putting the switch in another while loop.  If I still live in a time when file size mattered alot I would change it
 					//std::cout << "section_num = " << section_num << std::endl;
@@ -133,64 +134,38 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 					
 					switch (section_num) {
 						case 0:
-							do{
-								header.push_back(dxfpair(group_code, value));
-								file.getline(value, MAX_STR_LN);
-								group_code = atoi(value);
-								file.getline(value, MAX_STR_LN);
-							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
+							dfxptr = &header;
 							break;
 						case 1:
-							if ( (group_code != 0) || (strncmp(value,"ENDSEC",6) != 0)) {
-								// Some dxf files have blank sections.  These are not handled by the do/while loop so break about if needed
-								do{
-									classes.push_back(dxfpair(group_code, value));
-									file.getline(value, MAX_STR_LN);
-									group_code = atoi(value);
-									file.getline(value, MAX_STR_LN);
-								} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
-							}
+							dfxptr = &classes;
 							break;
 						case 2:
-							do{
-								tables.push_back(dxfpair(group_code, value));
-								file.getline(value, MAX_STR_LN);
-								group_code = atoi(value);
-								file.getline(value, MAX_STR_LN);
-							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));
+							dfxptr = &tables;
 							break;
 						case 3:
-							do{
-								blocks.push_back(dxfpair(group_code, value));
-								file.getline(value, MAX_STR_LN);
-								group_code = atoi(value);
-								file.getline(value, MAX_STR_LN);
-							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
+							dfxptr = &blocks;
 							break;
 						case 4:
-							do{
-								entities.push_back(dxfpair(group_code, value));
-								file.getline(value, MAX_STR_LN);
-								group_code = atoi(value);
-								file.getline(value, MAX_STR_LN);
-							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
+							dfxptr = &entities;
 							break;
 						case 5:
-							do{
-								objects.push_back(dxfpair(group_code, value));
-								file.getline(value, MAX_STR_LN);
-								group_code = atoi(value);
-								file.getline(value, MAX_STR_LN);
-							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
+							dfxptr = &objects;
 							break;
 						case 6:
-							do{
-								thumbnailimage.push_back(dxfpair(group_code, value));
-								file.getline(value, MAX_STR_LN);
-								group_code = atoi(value);
-								file.getline(value, MAX_STR_LN);
-							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
-							break;	
+							dfxptr = &thumbnailimage;
+							break;
+						
+					}
+					
+					// Loop until there's a blank section or ENDSEC
+					while ((group_code != 0) || (strncmp(value,"ENDSEC",6) != 0)) {
+						//classes.push_back(dxfpair(group_code, value));
+						dfxptr->push_back(dxfpair(group_code, value));
+						file.getline(value, MAX_STR_LN);
+						group_code = atoi(value);
+						file.getline(value, MAX_STR_LN);
+						if((!file.eof()))
+							break;
 					}
 				}
 			}	
