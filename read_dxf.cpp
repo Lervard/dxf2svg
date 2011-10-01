@@ -47,10 +47,9 @@ dxfpair::~dxfpair() {
 }
 
 char * dxfpair::value_char(char *string) {
-	int size = value.size(),
-	    last = (int)(value[size-1]); // For efficiency purposes
+	int size = value.size();
 	
-	while ((size > 0) && (last < 33)) {
+	while ((size > 0) && ((int)(value[size-1]) < 33)) {
 		// Strip off any control characters and spaces off the end of the string
 		size--;
 	}
