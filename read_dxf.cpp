@@ -126,11 +126,13 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 					// Make sure the the group code is 2 for the SECTION name
 					// This is a big block of mostly repetitive code, it will result in larger code, but would be faster than putting the switch in another while loop.  If I still live in a time when file size mattered alot I would change it
 					//std::cout << "section_num = " << section_num << std::endl;
+					
+					file.getline(value, MAX_STR_LN);
+					group_code = atoi(value);
+					file.getline(value, MAX_STR_LN);
+					
 					switch (section_num) {
 						case 0:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);
 							do{
 								header.push_back(dxfpair(group_code, value));
 								file.getline(value, MAX_STR_LN);
@@ -139,9 +141,6 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
 							break;
 						case 1:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);
 							if ( (group_code != 0) || (strncmp(value,"ENDSEC",6) != 0)) {
 								// Some dxf files have blank sections.  These are not handled by the do/while loop so break about if needed
 								do{
@@ -153,9 +152,6 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 							}
 							break;
 						case 2:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);
 							do{
 								tables.push_back(dxfpair(group_code, value));
 								file.getline(value, MAX_STR_LN);
@@ -164,9 +160,6 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));
 							break;
 						case 3:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);
 							do{
 								blocks.push_back(dxfpair(group_code, value));
 								file.getline(value, MAX_STR_LN);
@@ -175,9 +168,6 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
 							break;
 						case 4:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);
 							do{
 								entities.push_back(dxfpair(group_code, value));
 								file.getline(value, MAX_STR_LN);
@@ -186,9 +176,6 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
 							break;
 						case 5:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);
 							do{
 								objects.push_back(dxfpair(group_code, value));
 								file.getline(value, MAX_STR_LN);
@@ -197,20 +184,13 @@ std::vector< std::vector< dxfpair > > dxf_get_sections(char* filename) {
 							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
 							break;
 						case 6:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);
 							do{
 								thumbnailimage.push_back(dxfpair(group_code, value));
 								file.getline(value, MAX_STR_LN);
 								group_code = atoi(value);
 								file.getline(value, MAX_STR_LN);
 							} while(((group_code != 0) || strncmp(value, "ENDSEC", 6) != 0) && (!file.eof()));  // I put in the (group_code != 0) in the hope that it will be a faster bool compare than the string compare.  Test this later
-							break;
-						default:
-							file.getline(value, MAX_STR_LN);
-							group_code = atoi(value);
-							file.getline(value, MAX_STR_LN);	
+							break;	
 					}
 				}
 			}	
